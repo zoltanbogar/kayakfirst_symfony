@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Kayakfirst!</title>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=latin-ext" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="css/selectize.bootstrap3.css" rel="stylesheet">
+		<link href="css/EJSChart.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-kayak">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+							data-target="#kayak-navbar-collapse" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="http://www.kayakfirst.com"></a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="kayak-navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="http://www.kayakfirst.com"><span class="glyphicon glyphicon-home"></span></a></li>
+							<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
+						</ul>
+						<p class="navbar-text navbar-right">
+							Signed in as <b>tesr731</b>
+						</p>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		</header>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="box sm full-height">
+						<h2>Date</h2>
+						<div class="date-container" data-training-days-url="source/days.json">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="box semi-height">
+								<h2>Sessions</h2>
+								<div class="box-body">
+									<table class="table table-hover text-center" id="session-table"
+										data-trainings-url="source/1daydata.json">
+										<thead>
+											<tr>
+												<th class="text-center" width="33%">Start</th>
+												<th class="text-center" width="33%">Duration</th>
+												<th class="text-center">Distance</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="box semi-height avg-table">
+								<h2>Average</h2>
+								<div class="row" id="avg-table">
+									<div class="col-sm-4 col-md-2" id="avg-pace-1000">
+										<h4>Pace<br><span
+											class="uom">1000m</span></h4>
+										<span
+											class="avg-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="avg-pace-500">
+										<h4>Pace<br><span
+											class="uom">500m</span></h4>
+										<span
+											class="avg-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="avg-pace-200">
+										<h4>Pace<br><span
+											class="uom">200m</span></h4>
+										<span
+											class="avg-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="avg-speed">
+										<h4>Speed<br><span class="uom">km/h</span>
+										</h4>
+										<span
+											class="avg-value">-</span><span class="uom"></span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="avg-stroke">
+										<h4>Stroke<br><span
+											class="uom">/min</span></h4>
+										<span
+											class="avg-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="avg-pull-force">
+										<h4>Pull force<br><span
+											class="uom">N</span></h4>
+										<span
+											class="avg-value">-</span>
+									</div>
+								</div>
+								<hr>
+								<h2>Best</h2>
+								<div class="row" id="best-table">
+									<div class="col-sm-4 col-md-2" id="best-pace-1000">
+										<h4>Pace<br><span
+											class="uom">1000m</span></h4>
+										<span
+											class="best-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="best-pace-500">
+										<h4>Pace<br><span
+											class="uom">500m</span></h4>
+										<span
+											class="best-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="best-pace-200">
+										<h4>Pace<br><span
+											class="uom">200m</span></h4>
+										<span
+											class="best-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="best-speed">
+										<h4>Speed<br><span
+											class="uom">km/h</span></h4>
+										<span
+											class="best-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="best-stroke">
+										<h4>Stroke<br><span
+											class="uom">/min</span></h4>
+										<span class="best-value">-</span>
+									</div>
+									<div class="col-sm-4 col-md-2" id="best-pull-force">
+										<h4>Pull force<br><span class="uom">N</span>
+										</h4>
+										<span
+											class="best-value">-</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="chart-options" id="chart-legend"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="chart" style="height:400px;margin:auto;"></div>
+		<div id="loading-overlay"><img src="/images/loading.gif" alt="Loading"></div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery-3.1.1.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
+		<script src="js/selectize.min.js"></script>
+		<script src="js/moment.min.js"></script>
+		<script src="js/ejschart/EJSChart.js"></script>
+		<script src="js/public.js"></script>
+	</body>
+</html>

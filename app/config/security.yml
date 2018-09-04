@@ -1,0 +1,95 @@
+security:
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+        hwi:
+            id: hwi_oauth.user.provider
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|img|js|media)/
+            security: false
+
+        firebase:
+            pattern: ^/(firebase)/
+            security: false
+
+        v2:
+            pattern: ^/(v2)/
+            security: false
+
+        ecwid_login:
+            pattern: ^/(ecwid_login|ecwid_login_static)
+            security: false
+
+        refresh:
+            pattern:  ^/api/token/refresh
+            stateless: true
+            anonymous: true
+
+        api:
+            pattern: ^/api
+            anonymous: ~
+            stateless: true
+            guard:
+                authenticators:
+                    - app.security.jwt_token_authenticator
+            logout:
+                path:   /api/logout
+                target: /api/rest
+            provider: fos_userbundle
+
+        main:
+            pattern: ^/
+            security: true
+            anonymous: true
+            logout: true
+            form_login:
+                login_path: /login
+                default_target_path: /
+                always_use_default_target_path: true
+                provider: fos_userbundle
+            oauth:
+                resource_owners:
+                    facebook: "/login/check-facebook"
+                    google:   "/login/check-google"
+                login_path:       /login
+                use_forward:      true
+                failure_path:     /login
+                default_target_path:     /
+                oauth_user_provider:
+                    service: app.provider.oauth
+                failure_handler:     app.oauthfailurehandler
+
+    access_control:
+        - { path: ^/api/version, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/api_ecwid_login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/api_contact_us, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/uploadLog, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/rest, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users/pwreset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users/getMessage, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users/broadcastPush, roles: ROLE_ADMIN }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: [ROLE_USER] }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: [ROLE_USER] }
+
+        - { path: ^/firebase, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/shop, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/v2, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/ecwid_login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/ecwid_login_static, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,0 +1,57 @@
+gesdinet_jwt_refresh_token:
+    path:     /api/token/refresh
+    defaults: { _controller: gesdinet.jwtrefreshtoken:refresh }
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+app_api:
+    resource: "@AppBundle/Controller/Api/"
+    prefix:   /api
+    type:     annotation
+
+app_web:
+    resource: "@AppBundle/Controller/Web/"
+    prefix:   /webapi
+    type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+facebook_login:
+    path: /login/check-facebook
+google_login:
+    path: /login/check-google
+
+app_firebase:
+    resource: "@AppBundle/Controller/Firebase/"
+    type:     annotation
+
+logout_user:
+    path: /logout_user
+    defaults:   { _controller: AppBundle:Controller:Firebase:LogoutController:logout }
+
+homepage:
+    path:   /
+    defaults:  { _controller: AppBundle:Default:index }
+
+shop:
+    resource: "@AppBundle/Controller/Shop/"
+    type:     annotation
+
+v2:
+    resource:   "@AppBundle/Controller/V2/"
+    type:       annotation

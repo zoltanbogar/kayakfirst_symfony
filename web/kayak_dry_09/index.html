@@ -1,0 +1,242 @@
+<html>
+	<head>
+		<title>
+			EJSChart test
+		</title>
+		<link rel="stylesheet" href="css/EJSChart.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="js/ejschart/EJSChart.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div id="kayakChart" style="border: 3px solid grey;width:100%;height:40%;background-color: #383E42;"></div>
+		</div>
+	</body>
+	<script>
+		$(function() {
+			var kayakChart = new EJSC.Chart(
+				'kayakChart',
+				{
+					title: 'Sample Kayak Chart',
+					axis_top: {
+						caption: 'Distance (km)',
+						color: '#676767',
+						crosshair: {
+							show: true
+						},
+						grid: {
+							show: false
+						},
+						visible: true
+					},
+					axis_bottom: {
+						caption: 'Time (Hour:min:sec)',
+						color: '#676767',
+						crosshair: {
+							show: true
+						},
+						grid: {
+							show: false
+						},
+						visible: true
+					},
+					axis_left: {
+						caption: 'Pace',
+						color: '#676767',
+						crosshair: {
+							show: false
+						},
+						grid: {
+							show: false
+						},
+						visible: true
+					},
+					axis_right: {
+						caption: 'Value',
+						color: '#676767',
+						crosshair: {
+							show: false
+						},
+						grid: {
+							show: false
+						},
+						visible: true
+					},
+					auto_zoom: 'y',
+					auto_find_point_by_x: false,
+					show_legend: false
+				}
+			);
+			kayakChart.axis_bottom.formatter = new EJSC.DateFormatter({
+				format_string: "NN:SS"
+			});
+			kayakChart.axis_left.formatter = new EJSC.DateFormatter({
+				format_string: "NN:SS"
+			});
+
+			$.getJSON('source/1daydata.json', function(jsonData) {
+				var sessionIds = [];
+				for (var sessionId in jsonData) {
+					sessionIds.push(sessionId);
+				}
+	
+				var selectedSession = '1488991989598'; //INPUT!!!
+				//console.log(jsonData[selectedSession].data);
+				var sessionStart = jsonData[selectedSession].startTime;
+				var selectedData = jsonData[selectedSession].data;
+				var graphData = {};
+				for (var elem in selectedData) {
+					if (graphData[selectedData[elem].dataType] == undefined) {
+						graphData[selectedData[elem].dataType] = [];
+					}
+					if (selectedData[elem].dataType != 'currant_distance') {
+						graphData[selectedData[elem].dataType].push([selectedData[elem].timestamp - sessionStart, Math.round(selectedData[elem].dataValue*1000)/1000]);
+					} else {
+						graphData[selectedData[elem].dataType].push([selectedData[elem].dataValue, 0]);
+					}
+				}
+				kayakChart.addSeries(
+					new EJSC.LineSeries(
+						new EJSC.ArrayDataHandler(
+							graphData['currant_distance']
+						),
+						{
+							title: '',
+							color: '#C4C4C4',
+							x_axis: 'top',
+							y_axis: 'right',
+							padding: {
+								x_min: 0,
+								y_min: 1,
+								x_max: 0,
+								y_max: 5
+							}
+						}
+					)
+				);
+				kayakChart.addSeries(
+					new EJSC.LineSeries(
+						new EJSC.ArrayDataHandler(
+							graphData['t_200']
+						),
+						{
+							title: 'Pace 200M',
+							color: '#FFFF00',
+							x_axis: 'bottom',
+							y_axis: 'left',							
+							lineWidth: 3,	
+							padding: {
+								x_min: 0,
+								y_min: 1,
+								x_max: 0,
+								y_max: 5
+							}
+						}
+					)
+				);
+				kayakChart.addSeries(
+					new EJSC.LineSeries(
+						new EJSC.ArrayDataHandler(
+							graphData['t_500']
+						),
+						{
+							title: 'Pace 500M',
+							color: '#FFFF00',
+							x_axis: 'bottom',
+							y_axis: 'left',							
+							lineWidth: 3,	
+							padding: {
+								x_min: 0,
+								y_min: 1,
+								x_max: 0,
+								y_max: 5
+							}
+						}
+					)
+				);
+				kayakChart.addSeries(
+					new EJSC.LineSeries(
+						new EJSC.ArrayDataHandler(
+							graphData['t_1000']
+						),
+						{
+							title: 'Pace 1000M',
+							color: '#FFFF00',
+							x_axis: 'bottom',
+							y_axis: 'left',							
+							lineWidth: 3,	
+							padding: {
+								x_min: 0,
+								y_min: 1,
+								x_max: 0,
+								y_max: 5
+							}
+						}
+					)
+				);
+				kayakChart.addSeries(
+					new EJSC.LineSeries(
+						new EJSC.ArrayDataHandler(
+							graphData['pull_force']
+						),
+						{
+							title: 'Pull force',
+							color: '#0DD278',
+							x_axis: 'bottom',
+							y_axis: 'right',							
+							lineWidth: 3,	
+							padding: {
+								x_min: 0,
+								y_min: 1,
+								x_max: 0,
+								y_max: 5
+							}
+						}
+					)
+				);
+				kayakChart.addSeries(
+					new EJSC.LineSeries(
+						new EJSC.ArrayDataHandler(
+							graphData['speed']
+						),
+						{
+							title: 'Speed',
+							color: '#005CFF',
+							x_axis: 'bottom',
+							y_axis: 'right',							
+							lineWidth: 3,	
+							padding: {
+								x_min: 0,
+								y_min: 1,
+								x_max: 0,
+								y_max: 5
+							}
+						}
+					)
+				);
+				strokeSeries = new EJSC.LineSeries(
+					new EJSC.ArrayDataHandler(
+						graphData['strokes']
+					),
+					{
+						title: 'Strokes',
+						color: '#CD2929',
+						x_axis: 'bottom',
+						y_axis: 'right',							
+						lineWidth: 3,	
+						padding: {
+							x_min: 0,
+							y_min: 1,
+							x_max: 0,
+							y_max: 5
+						}
+					}
+				);
+				kayakChart.addSeries(
+					strokeSeries
+				);
+				kayakChart.removeSeries(strokeSeries);
+			});
+		});
+	</script>
+</html>

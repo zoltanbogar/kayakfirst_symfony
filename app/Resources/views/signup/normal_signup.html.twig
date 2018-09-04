@@ -1,0 +1,87 @@
+{% extends '::layout.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+            {{ form_start(form) }}
+            <input type="text" name="{{ form.username.vars.full_name }}" value="{{ form.username.vars.value }}"
+                   class="form-control input-lg" placeholder="{{ form.username.vars.name }}"/>
+            {% do form.username.setRendered %}
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <input type="text" name="{{ form.firstName.vars.full_name }}"
+                           value="{{ form.firstName.vars.value }}"
+                           class="form-control input-lg" placeholder="{{ form.firstName.vars.name }}"/>
+                    {% do form.firstName.setRendered %}
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <input type="text" name="{{ form.lastName.vars.full_name }}" value="{{ form.lastName.vars.value }}"
+                           class="form-control input-lg" placeholder="{{ form.lastName.vars.name }}"/>
+                    {% do form.lastName.setRendered %}
+                </div>
+            </div>
+            <input type="email" name="{{ form.email.vars.full_name }}" value="{{ form.email.vars.value }}"
+                   class="form-control input-lg" placeholder="{{ form.email.vars.name }}"/>
+            {% do form.email.setRendered %}
+            <input type="password" name="{{ form.plainPassword.first.vars.full_name }}"
+                   value="{{ form.plainPassword.first.vars.value }}" class="form-control input-lg"
+                   placeholder="{{ form.plainPassword.first.vars.label }}"/>
+            <input type="password" name="{{ form.plainPassword.second.vars.full_name }}"
+                   value="{{ form.plainPassword.second.vars.value }}" class="form-control input-lg"
+                   placeholder="{{ form.plainPassword.second.vars.label }}"/>
+            {% do form.plainPassword.setRendered %}
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <select name="{{ form.birthDate.day.vars.full_name }}" class="form-control input-lg">
+                        {% for choice in form.birthDate.day.vars.choices %}
+                            <option value="{{ choice.value }}">{{ choice.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    <select name="{{ form.birthDate.month.vars.full_name }}" class="form-control input-lg">
+                        {% for choice in form.birthDate.month.vars.choices %}
+                            <option value="{{ choice.value }}">{{ choice.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    <select name="{{ form.birthDate.year.vars.full_name }}" class="form-control input-lg">
+                        {% for choice in form.birthDate.year.vars.choices %}
+                            <option value="{{ choice.value }}">{{ choice.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% do form.birthDate.setRendered %}
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <select name="{{ form.gender.vars.full_name }}" class="form-control input-lg">
+                        {% for choice in form.gender.vars.choices %}
+                            <option value="{{ choice.value }}">{{ choice.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% do form.gender.setRendered %}
+                <div class="col-xs-6 col-md-6">
+                    <input type="number" name="{{ form.bodyWeight.vars.full_name }}"
+                           value="{{ form.bodyWeight.vars.value }}" class="form-control input-lg"
+                           placeholder="{{ form.bodyWeight.vars.name }}"/>
+                </div>
+                {% do form.bodyWeight.setRendered %}
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <select name="{{ form.country.vars.full_name }}" class="form-control input-lg">
+                        {% for choice in form.country.vars.choices %}
+                            <option value="{{ choice.value }}">{{ choice.label }}</option>
+                        {% endfor %}
+                    </select>
+                    {% do form.country.setRendered %}
+                </div>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Create my account</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

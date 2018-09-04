@@ -1,0 +1,25 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: kayakfirst-pgdb.postgres.database.azure.com
+    database_port: 5432
+    database_name: kayakfirst_dev
+    database_user: kayakroot@kayakfirst-pgdb
+    database_password: k@y4kf1rst
+    mailer_transport: smtp
+    mailer_host: 87.229.53.38
+    mailer_user: symfony@kayakfirst.com
+    mailer_password: kl239sdW
+    secret: oLKd9dlsknjer
+    jwt_private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
+    jwt_public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+    jwt_key_pass_phrase: test
+    jwt_token_ttl: 86400
+    facebook.client_id: xxx
+    facebook.client_secret: yyy
+    google.client_id: xxx
+    google.client_secret: yyy
+    android_gcm_api_key: asd
+    android_gcm_dry_run: true
+    ios_push_path_to_pem: '%kernel.root_dir%/../var/ios_push/api.pem'
+    ios_push_passphrase: asdf
+    ios_push_dry_run: true

@@ -1,0 +1,24 @@
+parameters:
+    database_host: kayakfirst-pgdb.postgres.database.azure.com
+    database_port: 5432
+    database_name: kayakfirst_prod
+    database_user: kayakroot@kayakfirst-pgdb
+    database_password: k@y4kf1rst
+    mailer_transport: smtp
+    mailer_host: 87.229.53.38
+    mailer_user: symfony@kayakfirst.com
+    mailer_password: kl239sdW
+    secret: oLKd9dlsknjer
+    jwt_private_key_path: /home/site/wwwroot/var/jwt/private.pem
+    jwt_public_key_path: /home/site/wwwroot/var/jwt/public.pem
+    jwt_key_pass_phrase: KJhsyu333
+    jwt_token_ttl: 2592000
+    facebook.client_id: 542088499322376
+    facebook.client_secret: a88defefdd46da0a0d1bafd6fbf3c877
+    google.client_id: 1042162787216-gjp3m01fac86av3ba1ppj1i3rmjfh7sg.apps.googleusercontent.com
+    google.client_secret: WnQkkqm8EmRqdUAJPrJ-KyOh
+    android_gcm_api_key: AIzaSyC3QKOO2Pywmj-ADd_K_qkKjEZ5ELiimV8
+    android_gcm_dry_run: false
+    ios_push_path_to_pem: /home/site/wwwroot/var/jwt/certificates.pem
+    ios_push_passphrase: Kayak1Joe
+    ios_push_dry_run: true
